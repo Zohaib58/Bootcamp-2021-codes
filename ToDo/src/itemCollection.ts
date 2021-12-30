@@ -40,6 +40,6 @@ export class itemCollection
     
     public printAll()
     {
-        this.items.forEach(item => item.printTask())
+        this.itemMap.forEach(item => item.printTask())
     }
 }
