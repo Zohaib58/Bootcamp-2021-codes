@@ -17,6 +17,23 @@ class itemCollection {
     getTodoById(id) {
         return this.itemMap.get(id);
     }
+    getToDoItems(isComplete) {
+        let items = [];
+        this.itemMap.forEach(item => {
+            if (item.done == isComplete) {
+                debugger;
+                items.push(item);
+            }
+        });
+        return this.items;
+    }
+    removeCompletedItems() {
+        this.itemMap.forEach(item => {
+            if (item.done == true) {
+                this.itemMap.delete(item.taskId);
+            }
+        });
+    }
     /*
     public taskDoneFIND(taskId: number)
     {
@@ -30,7 +47,8 @@ class itemCollection {
         this.getTodoById(taskId).done = true;
     }
     printAll() {
-        this.items.forEach(item => item.printTask);
+        this.itemMap.forEach(item => item.printTask());
     }
 }
 exports.itemCollection = itemCollection;
+//# sourceMappingURL=itemCollection.js.map

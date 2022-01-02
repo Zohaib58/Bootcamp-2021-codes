@@ -23,6 +23,33 @@ export class itemCollection
         return this.itemMap.get(id)
     }
 
+    public getToDoItems(isComplete: boolean) : Item[]
+    {
+        let items: Array<Item> = []
+        this.itemMap.forEach(item =>
+        {   
+               if (item.done == isComplete)  
+                {
+                    debugger
+                    items.push(item)
+                }
+                
+        })
+        return this.items
+
+    }
+    public removeCompletedItems(): void
+    {
+        this.itemMap.forEach(item => 
+        {
+             if (item.done == true)  
+             {
+                 this.itemMap.delete(item.taskId)
+             }
+             
+        })
+    }
+
     /*
     public taskDoneFIND(taskId: number)
     {
@@ -31,7 +58,7 @@ export class itemCollection
     }
     */
 
-    public taskDone(taskId: number)
+    public taskDone(taskId: number): void
     {
         // finding item through lambda function 'find' whose taskId is same as the parameter and marking it done
         //console.log(this.getTodoById(taskId))
