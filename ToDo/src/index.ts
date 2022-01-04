@@ -8,10 +8,12 @@ itemColl.addToDo("Task2");
 itemColl.addToDo("Task3");
 itemColl.addToDo("Task4");
 
-itemColl.taskDone(3);
+itemColl.taskDone(4);
 //console.log(itemColl.getTodoById(3));
 
-console.log(itemColl.getToDoItems(false));
+console.log(itemColl.getToDoItems(true));
+itemColl.removeCompletedItems();
+itemColl.printAll();
 
 //console.log(itemColl)
 //itemColl.printAll();
