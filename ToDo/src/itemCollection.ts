@@ -1,5 +1,17 @@
 import { Item } from "./item";
 
+/*
+ This type is made for the method getItemCounts() which returns two variables 
+ => total
+ => incomplete 
+
+ The return type of getItemCounts() is kept as ItemCounts to allow returning these two variables
+ */
+ type ItemCounts = {
+  total: number,
+  incomplete: number
+  }
+
 export class itemCollection
 {
     private nextId: number = 1;
@@ -8,6 +20,17 @@ export class itemCollection
   
     constructor(public userName: String, items: Item[] = []) {
       items.forEach((item) => this.itemMap.set(item.taskId, item));
+    }
+
+
+    public getItemCounts(): ItemCounts
+    {
+      return{
+        total: this.itemMap.size,
+        incomplete: this.getToDoItems(false).length
+      }
+      
+
     }
   
     public addToDo(task: String) {

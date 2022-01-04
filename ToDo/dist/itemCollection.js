@@ -10,6 +10,12 @@ class itemCollection {
         this.itemMap = new Map();
         items.forEach((item) => this.itemMap.set(item.taskId, item));
     }
+    getItemCounts() {
+        return {
+            total: this.itemMap.size,
+            incomplete: this.getToDoItems(false).length
+        };
+    }
     addToDo(task) {
         this.itemMap.set(this.nextId, new item_1.Item(this.nextId, task));
         this.nextId++;
