@@ -37,14 +37,28 @@ function displayTodoList(): void {
 }
 
 enum Commands {
+    Add = "Add New Task",
     Quit = "Quit",
     Toggle = "Show/Hide Completed"
 }
+
+function promptAdd(): void {
+    console.clear();
+    inquirer.prompt({ type: "input", name: "add", message: "Enter task:" })
+        .then(answers => {
+            if (answers["add"] !== "") {
+                itemColl.addToDo(answers["add"]);
+            }
+            promptUser();
+        })
+}
+
 
 function promptUser(): void {
     console.clear();
     displayTodoList();
     inquirer.prompt({
+        type: "list",
         name: "command",
         message: "Choose option",
         choices: Object.values(Commands),
@@ -54,6 +68,9 @@ function promptUser(): void {
             case Commands.Toggle:
                 showCompleted = !showCompleted;
                 promptUser();
+                break;
+            case Commands.Add:
+                promptAdd();
                 break;
         }
     })
