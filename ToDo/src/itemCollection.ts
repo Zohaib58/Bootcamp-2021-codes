@@ -38,6 +38,7 @@ export class itemCollection
       this.nextId++;
     }
   
+    // Following method prints all the items when provided true and incomplete items when provided false
     public getToDoItems(showComplete: boolean): Item[] {
       let completedItems: Array<Item> = [];
 
