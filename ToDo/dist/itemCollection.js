@@ -20,13 +20,19 @@ class itemCollection {
         this.itemMap.set(this.nextId, new item_1.Item(this.nextId, task));
         this.nextId++;
     }
-    getToDoItems(isComplete) {
+    // Following method prints all the items when provided true and incomplete items when provided false
+    getToDoItems(showComplete) {
         let completedItems = [];
-        this.itemMap.forEach((item) => {
-            if (item.done == isComplete) {
-                completedItems.push(item);
-            }
-        });
+        if (showComplete) {
+            this.itemMap.forEach((item) => completedItems.push(item));
+        }
+        else {
+            this.itemMap.forEach((item) => {
+                if (item.done == showComplete) {
+                    completedItems.push(item);
+                }
+            });
+        }
         return completedItems;
     }
     removeCompletedItems() {

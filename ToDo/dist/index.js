@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const itemCollection_1 = require("./itemCollection");
 const inquirer = require("inquirer");
 let itemColl = new itemCollection_1.itemCollection("Zohaib");
+let showCompleted = false;
 itemColl.addToDo("Task1");
 debugger;
 itemColl.addToDo("Task2");
@@ -25,24 +26,28 @@ itemColl.printAll();
 function displayTodoList() {
     console.log(`${itemColl.userName}'s Todo List `
         + `(${itemColl.getItemCounts().incomplete} items to do)`);
-    itemColl.printAll();
+    //itemColl.printAll();
+    itemColl.getToDoItems(showCompleted).forEach(item => item.printTask());
     //getToDoItems(false).forEach(item => item.printTask());
 }
 var Commands;
 (function (Commands) {
     Commands["Quit"] = "Quit";
+    Commands["Toggle"] = "Show/Hide Completed";
 })(Commands || (Commands = {}));
 function promptUser() {
     console.clear();
     displayTodoList();
     inquirer.prompt({
-        type: "list",
         name: "command",
         message: "Choose option",
-        choices: Object.values(Commands)
+        choices: Object.values(Commands),
     }).then(answers => {
-        if (answers["command"] !== Commands.Quit) {
-            promptUser();
+        switch (answers["command"]) {
+            case Commands.Toggle:
+                showCompleted = !showCompleted;
+                promptUser();
+                break;
         }
     });
 }
