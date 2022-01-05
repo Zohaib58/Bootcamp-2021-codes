@@ -38,13 +38,23 @@ export class itemCollection
       this.nextId++;
     }
   
-    public getToDoItems(isComplete: boolean): Item[] {
+    public getToDoItems(showComplete: boolean): Item[] {
       let completedItems: Array<Item> = [];
-      this.itemMap.forEach((item) => {
-        if (item.done == isComplete) {
-          completedItems.push(item);
-        }
-      });
+
+      if (showComplete)
+      {
+        this.itemMap.forEach((item) => completedItems.push(item))
+      }
+      else
+      {
+        this.itemMap.forEach((item) => {
+          if (item.done == showComplete) {
+            completedItems.push(item);
+          }
+        
+      }
+      );
+    }
       return completedItems;
     }
     public removeCompletedItems(): void {
