@@ -96,4 +96,10 @@ export class itemCollection
     public printAll() {
       this.itemMap.forEach((item) => item.printTask());
     }
+
+    public markComplete(taskId: number, b: boolean)
+    {const todoItem = this.getTodoById(taskId);
+      if (todoItem) {
+      todoItem.done = b;
+      }    }
 }

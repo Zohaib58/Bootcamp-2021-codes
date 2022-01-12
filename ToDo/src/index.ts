@@ -39,7 +39,8 @@ function displayTodoList(): void {
 enum Commands {
     Add = "Add New Task",
     Quit = "Quit",
-    Toggle = "Show/Hide Completed"
+    Toggle = "Show/Hide Completed",
+    Completed = "Task Completed"
 }
 
 function promptAdd(): void {
@@ -52,6 +53,21 @@ function promptAdd(): void {
             promptUser();
         })
 }
+
+function promptTaskCompleted(): void {
+    console.clear();
+    inquirer.prompt({ type: "checkbox", name: "complete",
+message: "Mark Tasks Complete",
+choices: itemColl.getToDoItems(showCompleted).map(item =>
+({name: item.task, value: item.taskId, checked: item.done}))
+}).then(answers => {
+let completedTasks = answers["complete"] as number[];
+itemColl.getToDoItems(true).forEach(item =>
+    itemColl.markComplete(item.taskId, completedTasks.find(id => id === item.taskId) != undefined))
+promptUser();
+})
+}
+
 
 
 function promptUser(): void {
@@ -72,6 +88,13 @@ function promptUser(): void {
             case Commands.Add:
                 promptAdd();
                 break;
+            case Commands.Completed:
+if (itemColl.getItemCounts().incomplete > 0) {
+promptTaskCompleted();
+} else {
+promptUser();
+}
+break;
         }
     })
 }
