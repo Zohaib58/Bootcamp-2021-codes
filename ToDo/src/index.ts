@@ -1,4 +1,4 @@
-import { itemCollection } from "./itemCollection";
+import { itemCollection } from "../src/itemCollection";
 import * as inquirer from 'inquirer';
 
 let itemColl: itemCollection = new itemCollection("Zohaib")
@@ -53,19 +53,20 @@ function promptAdd(): void {
             promptUser();
         })
 }
-
+// choices: collection.getTodoItems(showCompleted).map(item => 
+// ({name: item.task, value: item.id, checked: item.complete}))
 function promptTaskCompleted(): void {
     console.clear();
-    inquirer.prompt({ type: "checkbox", name: "complete",
-message: "Mark Tasks Complete",
-choices: itemColl.getToDoItems(showCompleted).map(item =>
-({name: item.task, value: item.taskId, checked: item.done}))
-}).then(answers => {
-let completedTasks = answers["complete"] as number[];
-itemColl.getToDoItems(true).forEach(item =>
-    itemColl.markComplete(item.taskId, completedTasks.find(id => id === item.taskId) != undefined))
-promptUser();
-})
+    inquirer.prompt({
+        type: "checkbox", name: "complete",
+        message: "Mark Tasks Complete",
+        choices: itemColl.getToDoItems(showCompleted).map(item => ({ name: item.task, value: item.taskId, checked: item.done })) as any
+    }).then(answers => {
+        let completedTasks = answers["complete"] as number[];
+        itemColl.getToDoItems(true).forEach(item =>
+            itemColl.markComplete(item.taskId, completedTasks.find(id => id === item.taskId) != undefined))
+        promptUser();
+    })
 }
 
 
@@ -89,12 +90,12 @@ function promptUser(): void {
                 promptAdd();
                 break;
             case Commands.Completed:
-if (itemColl.getItemCounts().incomplete > 0) {
-promptTaskCompleted();
-} else {
-promptUser();
-}
-break;
+                if (itemColl.getItemCounts().incomplete > 0) {
+                    promptTaskCompleted();
+                } else {
+                    promptUser();
+                }
+                break;
         }
     })
 }
