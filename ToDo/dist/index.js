@@ -17,8 +17,8 @@ function displayTodoList() {
 var Commands;
 (function (Commands) {
     Commands["Add"] = "Add New Task";
+    Commands["Completed"] = "Mark task as Completed";
     Commands["Toggle"] = "Show/Hide Completed Tasks";
-    Commands["Completed"] = "Task Completed";
     Commands["Quit"] = "Quit";
 })(Commands || (Commands = {}));
 function promptAdd() {

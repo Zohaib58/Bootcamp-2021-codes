@@ -37,8 +37,8 @@ function displayTodoList(): void {
 
 enum Commands {
     Add = "Add New Task",
+    Completed = "Mark task as Completed",
     Toggle = "Show/Hide Completed Tasks",
-    Completed = "Task Completed",
     Quit = "Quit"
     
 }
