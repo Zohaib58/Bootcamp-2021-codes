@@ -70,6 +70,12 @@ class itemCollection {
     printAll() {
         this.itemMap.forEach((item) => item.printTask());
     }
+    markComplete(taskId, b) {
+        const todoItem = this.getTodoById(taskId);
+        if (todoItem) {
+            todoItem.done = b;
+        }
+    }
 }
 exports.itemCollection = itemCollection;
 //# sourceMappingURL=itemCollection.js.map
