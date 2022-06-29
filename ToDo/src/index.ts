@@ -1,14 +1,13 @@
-import { itemCollection } from "../src/itemCollection";
+import { itemCollection } from "./itemCollection";
 import * as inquirer from 'inquirer';
 
 let itemColl: itemCollection = new itemCollection("Zohaib")
 let showCompleted: boolean = false
 
-itemColl.addToDo("Task1");
-debugger
-itemColl.addToDo("Task2");
-itemColl.addToDo("Task3");
-itemColl.addToDo("Task4");
+itemColl.addToDo("Sleep");
+itemColl.addToDo("Eat");
+itemColl.addToDo("Gym");
+itemColl.addToDo("Work");
 itemColl.taskDone(4);
 
 
@@ -38,9 +37,10 @@ function displayTodoList(): void {
 
 enum Commands {
     Add = "Add New Task",
-    Quit = "Quit",
-    Toggle = "Show/Hide Completed",
-    Completed = "Task Completed"
+    Toggle = "Show/Hide Completed Tasks",
+    Completed = "Task Completed",
+    Quit = "Quit"
+    
 }
 
 function promptAdd(): void {
